@@ -25,6 +25,18 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
+const requestIp = require('request-ip');
+
+// task endpoint
+app.get("/api/whoami", function (req, res) {
+  const ipaddress = requestIp.getClientIp(req); 
+  
+  res.json({
+    ipaddress,
+    language: '',
+    software: '',
+  });
+});
 
 
 // listen for requests :)
