@@ -29,12 +29,12 @@ const requestIp = require('request-ip');
 
 // task endpoint
 app.get("/api/whoami", function (req, res) {
-  const ipaddress = requestIp.getClientIp(req); 
+  const { headers } = req;
   
   res.json({
-    ipaddress,
-    language: '',
-    software: '',
+    ipaddress: headers['x-forwarded-for'],
+    language: headers['accept-language'],
+    software: headers['user-agent'],
   });
 });
 
